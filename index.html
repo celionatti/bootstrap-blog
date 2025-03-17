@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Celio Natti">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Blog Template</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button class="btn btn-primary dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun d-none"></i>
+    </button>
+
+    <header class="fixed-header border-bottom">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg py-3">
+          <a class="navbar-brand" href="#">ModernBlog</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Articles</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+              <li class="nav-item ms-2"><a class="btn btn-pattern text-white" href="#">Subscribe</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <!-- <section class="hero text-white">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeIn">Welcome to Our Blog</h1>
+            <p class="lead mb-4">Discover amazing content and insights</p>
+            <button class="btn btn-pattern">Explore Articles</button>
+        </div>
+    </section> -->
+    <section class="hero text-white">
+        <div class="container text-center">
+            <h1 class="hero-title">Welcome to Our Blog</h1>
+            <p class="hero-subtitle">Discover amazing content and insights</p>
+            <button class="btn btn-pattern btn-block-mobile">Explore Articles</button>
+        </div>
+    </section>
+
+    <main class="container">
+      <!-- Featured Post -->
+      <div class="featured-post p-4 p-md-5 mb-4">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h1 class="display-5 fw-bold">The Future of Web Development</h1>
+            <p class="lead my-3">Explore the latest trends and technologies shaping the future of web development in 2024.</p>
+            <a href="#" class="btn btn-light btn-lg mt-3">Read More</a>
+          </div>
+          <div class="col-md-6 mt-4 mt-md-0">
+            <img src="assets/img/1.png"
+                 class="post-card-img rounded-3"
+                 alt="Technology concept"
+                 loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Navigation -->
+      <div class="nav-scroller py-2 px-2 mb-4 category-nav rounded">
+        <nav class="nav d-flex flex-nowrap overflow-auto">
+          <a class="nav-link active" href="#">All</a>
+          <a class="nav-link" href="#">Technology</a>
+          <a class="nav-link" href="#">Design</a>
+          <a class="nav-link" href="#">Development</a>
+          <a class="nav-link" href="#">Business</a>
+          <a class="nav-link" href="#">Startups</a>
+          <a class="nav-link" href="#">Marketing</a>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="row g-2">
+        <div class="col-md-7">
+          <div class="row row-cols-1 g-4">
+            <!-- Post Card 1 -->
+            <div class="col">
+              <div class="post-card card h-100 shadow-sm">
+                <div class="img-container position-relative">
+                  <span class="category-badge badge bg-primary">Tech</span>
+                  <img src="assets/img/1.png"
+                       class="post-card-img"
+                       alt="Coding example"
+                       loading="lazy">
+                </div>
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-3">
+                    <small class="text-muted">Jan 15, 2024 • 5 min read</small>
+                  </div>
+                  <h3 class="h4">Building Modern Web Applications</h3>
+                  <p>Discover the best practices for creating scalable and maintainable web applications using modern frameworks.</p>
+                  <a href="#" class="stretched-link"></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post Card 2 -->
+            <div class="col">
+              <div class="post-card card h-100 shadow-sm">
+                <div class="img-container position-relative">
+                  <span class="category-badge badge bg-success">Design</span>
+                  <img src="assets/img/1.png"
+                       class="post-card-img"
+                       alt="UI Design"
+                       loading="lazy">
+                </div>
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-3">
+                    <small class="text-muted">Jan 14, 2024 • 4 min read</small>
+                  </div>
+                  <h3 class="h4">Modern UI Design Principles</h3>
+                  <p>Essential principles for creating user interfaces that are both beautiful and functional.</p>
+                  <a href="#" class="stretched-link"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-5">
+          <div class="position-sticky sidebar-sticky">
+            <div class="sidebar-widget">
+              <h4 class="fw-bold mb-3 text-dark">Trending Posts</h4>
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                  <img src="assets/img/1.png"
+                       alt="AI"
+                       class="rounded"
+                       width="60"
+                       height="60"
+                       loading="lazy">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-0">AI in Modern Development</h6>
+                    <small class="text-muted nowrap">2,345 views</small>
+                  </div>
+                </a>
+                <!-- Add more trending posts -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <h4>ModernBlog</h4>
+                    <p>Exploring the latest in technology and design</p>
+                    <div class="social-links">
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-github"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 mt-4 mt-md-0">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">AI</a></li>
+                        <li><a href="#">Design</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3 mt-4 mt-md-0">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3 mt-4 mt-md-0">
+                    <h5>Newsletter</h5>
+                    <form class="newsletter-form">
+                        <input type="email" class="form-control mb-2" placeholder="Enter your email">
+                        <button class="btn btn-light btn-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <p class="text-center">&copy; 2023 TechBlog. All rights reserved.</p>
+        </div>
+    </footer>
+
+  <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        const moonIcon = darkModeToggle.querySelector('.fa-moon');
+        const sunIcon = darkModeToggle.querySelector('.fa-sun');
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+            moonIcon.classList.toggle('d-none');
+            sunIcon.classList.toggle('d-none');
+        });
+
+        // Update initial state check
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            moonIcon.classList.add('d-none');
+            sunIcon.classList.remove('d-none');
+        }
+
+        // Add abstract shapes animation
+        const createAbstractShapes = () => {
+            const container = document.createElement('div');
+            container.className = 'abstract-shape';
+            container.style.top = Math.random() * 90 + 'vh';  // Keep within viewport
+            container.style.left = Math.random() * 90 + 'vw';  // Keep within viewport
+            document.body.appendChild(container);
+        }
+
+        // Create multiple shapes
+        for (let i = 0; i < 5; i++) {
+            createAbstractShapes();
+        }
+    </script>
+  </body>
+</html>

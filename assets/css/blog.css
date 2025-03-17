@@ -1,0 +1,97 @@
+/* Add these mobile-specific styles */
+@media (max-width: 767.98px) {
+    .hero {
+        padding: 80px 0;
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .featured-post {
+        padding: 1.5rem !important;
+    }
+
+    .featured-post h1 {
+        font-size: 1.75rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .post-card-img {
+        height: 180px;
+    }
+
+    .sidebar-sticky {
+        position: static !important;
+        padding-left: 0 !important;
+    }
+
+    .footer {
+        clip-path: polygon(0 2%, 100% 0, 100% 100%, 0 100%);
+        padding: 3rem 0 1rem;
+    }
+
+    .btn-block-mobile {
+        width: 100%;
+    }
+
+    .category-nav {
+        margin-left: -15px;
+        margin-right: -15px;
+        border-radius: 0;
+    }
+
+    .nav-scroller .nav {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+/* Additional responsive tweaks */
+@media (max-width: 575.98px) {
+    .fixed-header {
+        --header-height: 60px;
+    }
+
+    body {
+        padding-top: 60px;
+    }
+
+    .navbar-nav {
+        padding-top: 1rem;
+    }
+
+    .btn-pattern {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .abstract-shape {
+        display: none;
+    }
+}
+
+/* Ensure images are responsive */
+.post-card-img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mobile-first adjustments */
+.navbar-toggler {
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+}
+
+.sidebar-widget {
+    margin-top: 2rem;
+}
