@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Celio Natti">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Blog Template</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/article.css">
+  </head>
+  <body>
+    <!-- Dark Mode Toggle -->
+    <button class="btn btn-primary dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun d-none"></i>
+    </button>
+
+    <header class="fixed-header border-bottom">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg py-3">
+          <a class="navbar-brand" href="#">ModernBlog</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Articles</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+              <li class="nav-item ms-2 my-2"><a class="btn btn-pattern text-white" href="#">Subscribe</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Post Hero Section -->
+    <section class="post-hero text-white">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <span class="badge bg-primary mb-3">Technology</span>
+                    <h1 class="post-title mb-4">Building Modern Web Applications</h1>
+                    <div class="post-meta d-flex align-items-center justify-content-center gap-3">
+                        <img src="assets/img/user1.jpg" class="author-avatar rounded-circle" alt="Author" width="40" height="40">
+                        <div class="text-start">
+                            <span class="d-block">Celio Natti</span>
+                            <small class="text-white-50">Jan 15, 2024 • 5 min read</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="row g-5">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <article class="blog-post">
+                    <img src="assets/img/1.png" class="post-featured-img rounded-3 mb-4" alt="Featured Image">
+
+                    <div class="post-content">
+                        <p class="lead">Discover the best practices for creating scalable and maintainable web applications using modern frameworks.</p>
+
+                        <h2 class="section-heading mt-5">Introduction to Modern Development</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                        <pre class="code-block p-3 rounded-3"><code>function example() {
+    console.log("Code formatting example");
+}</code></pre>
+
+                        <h3 class="sub-section-heading">Key Considerations</h3>
+                        <ul class="custom-list">
+                            <li>Performance optimization</li>
+                            <li>Scalable architecture</li>
+                            <li>Developer experience</li>
+                        </ul>
+
+                        <blockquote class="blockquote-custom p-4 rounded-3">
+                            <p>"The best way to predict the future is to create it."</p>
+                            <footer class="blockquote-footer mt-2">Peter Drucker</footer>
+                        </blockquote>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="post-tags mt-5">
+                        <a href="#" class="btn btn-sm btn-outline-secondary me-2">#WebDev</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary me-2">#JavaScript</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">#Frameworks</a>
+                    </div>
+                </article>
+
+                <!-- Comments Section -->
+                <section class="comments-section mt-5">
+                    <h3 class="mb-4">Discussion (3)</h3>
+
+                    <div class="comment-list">
+                        <!-- Comment 1 -->
+                        <div class="comment-card card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex gap-3">
+                                    <img src="assets/img/user1.jpg" class="comment-avatar rounded-circle" width="40" height="40" alt="User">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h5 class="mb-0">Sarah Johnson</h5>
+                                            <small class="text-muted">2 hours ago</small>
+                                        </div>
+                                        <p class="mb-0">Great article! Really helpful insights.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more comments -->
+                    </div>
+
+                    <!-- Comment Form -->
+                    <form class="comment-form mt-5">
+                        <h4 class="mb-3">Leave a comment</h4>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="4" placeholder="Join the discussion..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-pattern text-white">Post Comment</button>
+                    </form>
+                </section>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="position-sticky sidebar-sticky">
+                    <!-- Author Card -->
+                    <div class="author-card card mb-4">
+                        <div class="card-body text-center">
+                            <img src="assets/img/author.jpg" class="author-avatar-lg rounded-circle mb-3" alt="Author" width="100" height="100">
+                            <h4 class="mb-2">Celio Natti</h4>
+                            <p class="text-muted small">Full-stack developer and technical writer. Passionate about modern web technologies.</p>
+                            <div class="social-links">
+                                <a href="#" class="btn btn-sm btn-outline-secondary me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="btn btn-sm btn-outline-secondary me-2"><i class="fab fa-github"></i></a>
+                                <a href="#" class="btn btn-sm btn-outline-secondary"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Posts -->
+                    <div class="related-posts card">
+                        <div class="card-body">
+                            <h5 class="mb-3">Related Posts</h5>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex align-items-center">
+                                        <img src="assets/img/1.png" class="me-3 rounded" width="60" height="60" alt="Related post">
+                                        <span>Modern UI Design Patterns</span>
+                                    </div>
+                                </a>
+                                <!-- Add more related posts -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <h4>ModernBlog</h4>
+                    <p>Exploring the latest in technology and design</p>
+                    <div class="social-links">
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-github"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 mt-4 mt-md-0">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">AI</a></li>
+                        <li><a href="#">Design</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3 mt-4 mt-md-0">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3 mt-4 mt-md-0">
+                    <h5>Newsletter</h5>
+                    <form class="newsletter-form">
+                        <input type="email" class="form-control mb-2" placeholder="Enter your email">
+                        <button class="btn btn-light btn-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <p class="text-center">&copy; 2023 TechBlog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        const moonIcon = darkModeToggle.querySelector('.fa-moon');
+        const sunIcon = darkModeToggle.querySelector('.fa-sun');
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+            moonIcon.classList.toggle('d-none');
+            sunIcon.classList.toggle('d-none');
+        });
+
+        // Update initial state check
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            moonIcon.classList.add('d-none');
+            sunIcon.classList.remove('d-none');
+        }
+
+        // Add abstract shapes animation
+        const createAbstractShapes = () => {
+            const container = document.createElement('div');
+            container.className = 'abstract-shape';
+            container.style.top = Math.random() * 90 + 'vh';  // Keep within viewport
+            container.style.left = Math.random() * 90 + 'vw';  // Keep within viewport
+            document.body.appendChild(container);
+        }
+
+        // Create multiple shapes
+        for (let i = 0; i < 5; i++) {
+            createAbstractShapes();
+        }
+    </script>
+  </body>
+</html>
