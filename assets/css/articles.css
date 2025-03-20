@@ -1,0 +1,102 @@
+/* Articles Page Styles */
+.articles-header {
+    padding: 100px 0 60px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    margin-bottom: 3rem;
+}
+
+.search-form .input-group {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.search-input {
+    border: none;
+    padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.95);
+}
+
+.search-input:focus {
+    box-shadow: none;
+    background: white;
+}
+
+.article-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.article-card-img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.75rem 0 0 0.75rem;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.page-link {
+    color: var(--primary-color);
+}
+
+.dark-mode .page-link {
+    color: var(--primary-color);
+/*            color: #000;*/
+}
+
+.dark-mode .page-item.active .page-link {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .articles-header {
+        padding: 80px 0 40px;
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+    }
+
+    .article-card-img {
+        border-radius: 0.75rem 0.75rem 0 0;
+        height: 150px;
+    }
+
+    .search-form .input-group {
+        flex-direction: column;
+        border-radius: 1rem;
+    }
+
+    .search-input {
+        border-radius: 1rem 1rem 0 0;
+        padding: 0.75rem;
+    }
+
+    .search-form button {
+        border-radius: 0 0 1rem 1rem;
+        width: 100%;
+    }
+
+    .filters .btn-group {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 576px) {
+    .article-card-img {
+        height: 120px;
+    }
+
+    .articles-header h1 {
+        font-size: 2rem;
+    }
+}
