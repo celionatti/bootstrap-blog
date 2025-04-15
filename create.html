@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventlyy - Create New Event</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --primary-green: #77AD78;
+      --dark-blue: #175676;
+      --medium-blue: #4BA3C3;
+      --light-blue: #CCE6F4;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px;
+      overflow-x: hidden;
+      background-color: #f9f9f9;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      background-color: var(--dark-blue);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 1.8rem;
+    }
+
+    .nav-link {
+      color: var(--white) !important;
+      font-weight: 500;
+      margin: 0 5px;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-green) !important;
+    }
+
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--light-blue);
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Page header */
+    .page-header {
+      background-color: var(--dark-blue);
+      padding: 30px 0;
+      margin-top: -20px;
+      color: var(--white);
+    }
+
+    /* Form styling */
+    .form-section {
+      padding: 40px 0;
+    }
+
+    .form-container {
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 12px 15px;
+      min-height: 50px;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-green);
+      box-shadow: 0 0 0 0.2rem rgba(119, 173, 120, 0.25);
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+    }
+
+    .form-check-input:checked {
+      background-color: var(--primary-green);
+      border-color: var(--primary-green);
+    }
+
+    .section-title {
+      color: var(--dark-blue);
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-blue);
+    }
+
+    /* Upload area */
+    .upload-area {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary-green);
+    }
+
+    .upload-icon {
+      font-size: 2.5rem;
+      color: var(--primary-green);
+      margin-bottom: 15px;
+    }
+
+    /* Ticket types */
+    .ticket-type-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .remove-ticket {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+      color: #dc3545;
+      font-size: 1.2rem;
+    }
+
+    /* Action buttons */
+    .btn-primary-action {
+      background-color: var(--primary-green);
+      border-color: var(--primary-green);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 500;
+      min-width: 150px;
+    }
+
+    .btn-primary-action:hover {
+      background-color: #5f9960;
+      border-color: #5f9960;
+      color: white;
+    }
+
+    .btn-outline-action {
+      border: 2px solid var(--primary-green);
+      color: var(--primary-green);
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 500;
+      background-color: transparent;
+    }
+
+    .btn-outline-action:hover {
+      background-color: var(--primary-green);
+      color: white;
+    }
+
+    .btn-add-more {
+      color: var(--dark-blue);
+      background-color: transparent;
+      border: 1px dashed var(--dark-blue);
+      border-radius: 8px;
+      padding: 12px;
+      width: 100%;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .btn-add-more:hover {
+      background-color: var(--light-blue);
+    }
+
+    /* Steps indicator */
+    .steps-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .steps-container::before {
+      content: '';
+      position: absolute;
+      top: 17px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background-color: #e0e0e0;
+      z-index: 1;
+    }
+
+    .step {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: white;
+      border: 2px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step.active {
+      background-color: var(--primary-green);
+      border-color: var(--primary-green);
+      color: white;
+    }
+
+    .step.completed {
+      background-color: white;
+      border-color: var(--primary-green);
+      color: var(--primary-green);
+    }
+
+    .step-label {
+      position: absolute;
+      top: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Helper classes */
+    .text-muted-custom {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive fixes */
+    @media (max-width: 767.98px) {
+      .form-container {
+        padding: 20px 15px;
+      }
+
+      .step-label {
+        font-size: 0.7rem;
+      }
+
+      .steps-container::before {
+        left: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" aria-label="Eventlyy">
+    <div class="container">
+      <a class="navbar-brand" href="#">Eventlyy.</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Eventlyy.</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">My Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Create Event</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sales</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Analytics</a>
+            </li>
+          </ul>
+          <div class="d-flex gap-2">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle me-1"></i> John Doe
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Sign Out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-8 col-lg-9">
+          <h1 class="fw-bold mb-2">Create New Event</h1>
+          <p class="mb-0">Fill out the form below to create and publish your event</p>
+        </div>
+        <div class="col-md-4 col-lg-3 text-md-end mt-3 mt-md-0">
+          <a href="#" class="btn" style="background-color: var(--white); color: var(--dark-blue); border-radius: 8px; font-weight: 500;">
+            <i class="fas fa-question-circle me-2"></i> Get Help
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress Indicator -->
+  <div class="container mt-4">
+    <div class="steps-container">
+      <div class="position-relative">
+        <div class="step active">1</div>
+        <span class="step-label">Event Details</span>
+      </div>
+      <div class="position-relative">
+        <div class="step">2</div>
+        <span class="step-label">Tickets</span>
+      </div>
+      <div class="position-relative">
+        <div class="step">3</div>
+        <span class="step-label">Publish</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Section -->
+  <section class="form-section">
+    <div class="container">
+      <form action="#">
+        <!-- Basic Info -->
+        <div class="form-container">
+          <h3 class="section-title">Basic Information</h3>
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="eventName" class="form-label">Event Name*</label>
+              <input type="text" class="form-control" id="eventName" placeholder="Give your event a clear, descriptive name" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="eventCategory" class="form-label">Event Category*</label>
+              <select class="form-select" id="eventCategory" required>
+                <option value="" selected disabled>Select category</option>
+                <option value="music">Music & Concerts</option>
+                <option value="business">Business & Networking</option>
+                <option value="arts">Arts & Theater</option>
+                <option value="community">Community & Culture</option>
+                <option value="sports">Sports & Fitness</option>
+                <option value="food">Food & Drinks</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label for="eventType" class="form-label">Event Type*</label>
+              <select class="form-select" id="eventType" required>
+                <option value="" selected disabled>Select type</option>
+                <option value="inperson">In-Person</option>
+                <option value="virtual">Virtual</option>
+                <option value="hybrid">Hybrid</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label for="eventDescription" class="form-label">Event Description*</label>
+              <textarea class="form-control" id="eventDescription" rows="5" placeholder="Describe your event, include details that will help attendees understand what to expect" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Time & Location -->
+        <div class="form-container">
+          <h3 class="section-title">Time & Location</h3>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="startDate" class="form-label">Start Date & Time*</label>
+              <input type="datetime-local" class="form-control" id="startDate" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="endDate" class="form-label">End Date & Time*</label>
+              <input type="datetime-local" class="form-control" id="endDate" required>
+            </div>
+
+            <div class="col-12">
+              <div class="form-check mb-3 mt-2">
+                <input class="form-check-input" type="checkbox" id="displayEndTime">
+                <label class="form-check-label" for="displayEndTime">
+                  Display end time on event page
+                </label>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="timeZone" class="form-label">Time Zone*</label>
+              <select class="form-select" id="timeZone" required>
+                <option value="" selected disabled>Select time zone</option>
+                <option value="GMT-8">Pacific Time (GMT-8)</option>
+                <option value="GMT-7">Mountain Time (GMT-7)</option>
+                <option value="GMT-6">Central Time (GMT-6)</option>
+                <option value="GMT-5">Eastern Time (GMT-5)</option>
+                <option value="GMT">Greenwich Mean Time (GMT)</option>
+                <option value="GMT+1">Central European Time (GMT+1)</option>
+              </select>
+            </div>
+
+            <div id="locationFields" class="col-12 mt-3">
+              <label for="venueName" class="form-label">Venue Name*</label>
+              <input type="text" class="form-control" id="venueName" placeholder="Enter venue name">
+
+              <div class="row g-3 mt-1">
+                <div class="col-12">
+                  <label for="address" class="form-label">Address*</label>
+                  <input type="text" class="form-control" id="address" placeholder="Street address">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="city" class="form-label">City*</label>
+                  <input type="text" class="form-control" id="city" placeholder="City">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="stateProvince" class="form-label">State/Province*</label>
+                  <input type="text" class="form-control" id="stateProvince" placeholder="State/Province">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="postalCode" class="form-label">Postal Code*</label>
+                  <input type="text" class="form-control" id="postalCode" placeholder="Postal/Zip code">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="country" class="form-label">Country*</label>
+                  <select class="form-select" id="country">
+                    <option value="" selected disabled>Select country</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="AU">Australia</option>
+                    <option value="FR">France</option>
+                    <option value="DE">Germany</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Image -->
+        <div class="form-container">
+          <h3 class="section-title">Event Image</h3>
+          <p class="text-muted-custom mb-4">Upload a compelling image that represents your event. Recommended size: 1920 x 1080px (16:9 ratio).</p>
+
+          <div class="upload-area" onclick="document.getElementById('imageUpload').click()">
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+            <p class="mb-2">Drag & drop your image here or click to browse</p>
+            <p class="text-muted-custom">Supports: JPG, PNG, GIF (max 10MB)</p>
+          </div>
+        </div>
+
+        <!-- Organizer Info -->
+        <div class="form-container">
+          <h3 class="section-title">Organizer Information</h3>
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="organizerName" class="form-label">Organizer Name*</label>
+              <input type="text" class="form-control" id="organizerName" placeholder="Name displayed to attendees" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="organizerEmail" class="form-label">Organizer Email*</label>
+              <input type="email" class="form-control" id="organizerEmail" placeholder="Public contact email" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="organizerPhone" class="form-label">Organizer Phone</label>
+              <input type="tel" class="form-control" id="organizerPhone" placeholder="Phone number (optional)">
+            </div>
+
+            <div class="col-12">
+              <label for="organizerDescription" class="form-label">About the Organizer</label>
+              <textarea class="form-control" id="organizerDescription" rows="3" placeholder="Tell attendees about yourself or your organization (optional)"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ticket Types -->
+        <div class="form-container">
+          <h3 class="section-title">Ticket Information</h3>
+          <div class="ticket-types-container">
+            <!-- First Ticket Type -->
+            <div class="ticket-type-card">
+              <span class="remove-ticket"><i class="fas fa-times-circle"></i></span>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="ticketName" class="form-label">Ticket Name*</label>
+                  <input type="text" class="form-control" id="ticketName" placeholder="e.g., General Admission, VIP" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="ticketType" class="form-label">Ticket Type*</label>
+                  <select class="form-select" id="ticketType" required>
+                    <option value="paid" selected>Paid</option>
+                    <option value="free">Free</option>
+                    <option value="donation">Donation</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="ticketPrice" class="form-label">Price*</label>
+                  <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="ticketPrice" min="0" step="0.01" placeholder="0.00" required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="ticketQuantity" class="form-label">Quantity Available*</label>
+                  <input type="number" class="form-control" id="ticketQuantity" min="1" placeholder="Enter number of tickets" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="ticketStartDate" class="form-label">Sales Start*</label>
+                  <input type="datetime-local" class="form-control" id="ticketStartDate" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="ticketEndDate" class="form-label">Sales End*</label>
+                  <input type="datetime-local" class="form-control" id="ticketEndDate" required>
+                </div>
+
+                <div class="col-12">
+                  <label for="ticketDescription" class="form-label">Description</label>
+                  <textarea class="form-control" id="ticketDescription" rows="2" placeholder="Describe what's included with this ticket (optional)"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Ticket Button -->
+          <button type="button" class="btn-add-more mt-3">
+            <i class="fas fa-plus-circle me-2"></i> Add Another Ticket Type
+          </button>
+        </div>
+
+        <!-- Advanced Settings (collapsed by default) -->
+        <div class="form-container">
+          <a class="d-flex justify-content-between align-items-center text-decoration-none" data-bs-toggle="collapse" href="#advancedSettings" role="button" aria-expanded="false" aria-controls="advancedSettings">
+            <h3 class="section-title mb-0">Advanced Settings</h3>
+            <i class="fas fa-chevron-down"></i>
+          </a>
+
+          <div class="collapse mt-3" id="advancedSettings">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="maxTicketsPerOrder" class="form-label">Max Tickets Per Order</label>
+                <input type="number" class="form-control" id="maxTicketsPerOrder" min="1" placeholder="Leave blank for unlimited">
+              </div>
+
+              <div class="col-md-6">
+                <label for="orderExpirationTime" class="form-label">Order Expiration Time</label>
+                <select class="form-select" id="orderExpirationTime">
+                  <option value="10">10 minutes</option>
+                  <option value="15" selected>15 minutes</option>
+                  <option value="20">20 minutes</option>
+                  <option value="30">30 minutes</option>
+                </select>
+              </div>
+
+              <div class="col-12 mt-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="showRemaining">
+                  <label class="form-check-label" for="showRemaining">
+                    Show remaining tickets count on event page
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="allowWaitlist">
+                  <label class="form-check-label" for="allowWaitlist">
+                    Allow waitlist when tickets are sold out
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="d-flex justify-content-between mt-4 mb-5">
+          <button type="button" class="btn btn-outline-action">
+            <i class="fas fa-save me-2"></i> Save Draft
+          </button>
+          <div>
+            <button type="button" class="btn btn-light me-2" style="border: 1px solid #ddd; border-radius: 8px; padding: 12px 25px;">Preview</button>
+            <button type="submit" class="btn btn-primary-action">Continue to Tickets <i class="fas fa-arrow-right ms-2"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
