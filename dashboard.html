@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventlyy - Admin Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #77AD78;    /* Green */
+            --secondary: #175676;  /* Dark Blue */
+            --accent: #4BA3C3;     /* Medium Blue */
+            --light: #CCE6F4;      /* Light Blue */
+            --white: #FFFFFF;      /* White */
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .sidebar {
+            background-color: var(--secondary);
+            color: var(--white);
+            min-height: 100vh;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar .logo {
+            background-color: var(--secondary);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar .logo h2 {
+            color: var(--white);
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            border-radius: 5px;
+            margin: 5px 10px;
+            transition: all 0.3s;
+        }
+
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+
+        .main-content {
+            margin-left: 0px;
+            padding: 20px;
+        }
+
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background-color: var(--white);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-weight: 600;
+        }
+
+        .stat-card {
+            border-left: 4px solid;
+            border-radius: 5px;
+        }
+
+        .stat-card.primary {
+            border-left-color: var(--primary);
+        }
+
+        .stat-card.secondary {
+            border-left-color: var(--secondary);
+        }
+
+        .stat-card.accent {
+            border-left-color: var(--accent);
+        }
+
+        .stat-card.light {
+            border-left-color: var(--light);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .btn-light {
+            background-color: var(--light);
+            border-color: var(--light);
+            color: var(--secondary);
+        }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        .text-secondary {
+            color: var(--secondary) !important;
+        }
+
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+
+        .bg-secondary {
+            background-color: var(--secondary) !important;
+        }
+
+        .bg-accent {
+            background-color: var(--accent) !important;
+        }
+
+        .bg-light-custom {
+            background-color: var(--light) !important;
+        }
+
+        .progress {
+            height: 8px;
+            margin-top: 8px;
+        }
+
+        .table-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .badge-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .badge-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .badge-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .badge-light {
+            background-color: var(--light);
+            color: var(--secondary);
+        }
+
+        .upcoming-events .card {
+            border-left: 4px solid var(--accent);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        .ticket-status {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-sold {
+            background-color: var(--primary);
+        }
+
+        .status-reserved {
+            background-color: var(--accent);
+        }
+
+        .status-available {
+            background-color: var(--light);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="logo">
+                    <h2>eventlyy</h2>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">
+                                <i class="bi bi-house-door"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="bi bi-calendar-event"></i> Events
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="bi bi-ticket-perforated"></i> Tickets
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="bi bi-people"></i> Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="bi bi-cash-coin"></i> Revenue
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="bi bi-graph-up"></i> Analytics
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="bi bi-gear"></i> Settings
+                            </a>
+                        </li>
+                    </ul>
+
+                    <hr class="my-3 bg-light">
+
+                    <div class="mt-auto">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 ms-sm-auto main-content">
+                <!-- Top Navigation -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4 rounded">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="d-flex align-items-center">
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="bi bi-search"></i></span>
+                                <input type="text" class="form-control border-0 bg-light" placeholder="Search">
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <div class="dropdown me-3">
+                                <a href="#" class="btn position-relative" id="notificationDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="bi bi-bell"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        3
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#">New ticket sale</a>
+                                    <a class="dropdown-item" href="#">Event approaching</a>
+                                    <a class="dropdown-item" href="#">System update</a>
+                                </div>
+                            </div>
+
+                            <div class="dropdown">
+                                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                    <div class="user-avatar me-2">JS</div>
+                                    <span class="d-none d-md-inline">John Smith</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Dashboard Content -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="mb-0">Dashboard</h2>
+                            <button class="btn btn-primary">
+                                <i class="bi bi-plus-circle me-2"></i>Create Event
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-6 col-xl-3 mb-4 mb-xl-0">
+                        <div class="card stat-card primary h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Total Events</h6>
+                                        <h3 class="mb-0">24</h3>
+                                    </div>
+                                    <div class="bg-light-custom p-3 rounded text-primary">
+                                        <i class="bi bi-calendar-event fs-4"></i>
+                                    </div>
+                                </div>
+                                <p class="small mt-3 mb-0">
+                                    <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 12%</span>
+                                    <span class="text-muted">from last month</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 mb-4 mb-xl-0">
+                        <div class="card stat-card secondary h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Tickets Sold</h6>
+                                        <h3 class="mb-0">1,892</h3>
+                                    </div>
+                                    <div class="bg-light-custom p-3 rounded text-secondary">
+                                        <i class="bi bi-ticket-perforated fs-4"></i>
+                                    </div>
+                                </div>
+                                <p class="small mt-3 mb-0">
+                                    <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 8%</span>
+                                    <span class="text-muted">from last month</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3 mb-4 mb-md-0">
+                        <div class="card stat-card accent h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Revenue</h6>
+                                        <h3 class="mb-0">$42,580</h3>
+                                    </div>
+                                    <div class="bg-light-custom p-3 rounded" style="color: var(--accent);">
+                                        <i class="bi bi-cash-coin fs-4"></i>
+                                    </div>
+                                </div>
+                                <p class="small mt-3 mb-0">
+                                    <span class="text-success me-1"><i class="bi bi-arrow-up"></i> 17%</span>
+                                    <span class="text-muted">from last month</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card stat-card light h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted mb-1">New Customers</h6>
+                                        <h3 class="mb-0">256</h3>
+                                    </div>
+                                    <div class="bg-light-custom p-3 rounded" style="color: var(--secondary);">
+                                        <i class="bi bi-people fs-4"></i>
+                                    </div>
+                                </div>
+                                <p class="small mt-3 mb-0">
+                                    <span class="text-danger me-1"><i class="bi bi-arrow-down"></i> 3%</span>
+                                    <span class="text-muted">from last month</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Tables Row -->
+                <div class="row mb-4">
+                    <!-- Sales Overview Chart -->
+                    <div class="col-lg-8 mb-4 mb-lg-0">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Sales Overview</h5>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="chartTimeRange" data-bs-toggle="dropdown">
+                                        Last 30 Days
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="chartTimeRange">
+                                        <li><a class="dropdown-item" href="#">Last 30 Days</a></li>
+                                        <li><a class="dropdown-item" href="#">Last Quarter</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <img src="/api/placeholder/800/250" alt="Sales Chart" class="img-fluid" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ticket Distribution -->
+                    <div class="col-lg-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="mb-0">Ticket Distribution</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container mb-3">
+                                    <img src="/api/placeholder/400/200" alt="Ticket Distribution" class="img-fluid" />
+                                </div>
+                                <div class="mt-3">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <div>
+                                            <span class="ticket-status status-sold"></span>
+                                            Sold
+                                        </div>
+                                        <strong>65%</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <div>
+                                            <span class="ticket-status status-reserved"></span>
+                                            Reserved
+                                        </div>
+                                        <strong>15%</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="ticket-status status-available"></span>
+                                            Available
+                                        </div>
+                                        <strong>20%</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events and Recent Sales -->
+                <div class="row mb-4">
+                    <!-- Upcoming Events -->
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="card upcoming-events h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Upcoming Events</h5>
+                                <a href="#" class="btn btn-sm btn-light">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-3 p-2 bg-light-custom rounded">
+                                                <i class="bi bi-music-note-beamed text-accent"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">Summer Music Festival</h6>
+                                                <small class="text-muted">
+                                                    <i class="bi bi-calendar me-1"></i> May 12, 2025
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <span class="badge badge-primary">75% Sold</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-3 p-2 bg-light-custom rounded">
+                                                <i class="bi bi-film text-accent"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">Film Festival Opening</h6>
+                                                <small class="text-muted">
+                                                    <i class="bi bi-calendar me-1"></i> May 18, 2025
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <span class="badge badge-accent">50% Sold</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-3 p-2 bg-light-custom rounded">
+                                                <i class="bi bi-cup-hot text-accent"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">Coffee & Art Exhibition</h6>
+                                                <small class="text-muted">
+                                                    <i class="bi bi-calendar me-1"></i> May 23, 2025
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <span class="badge badge-light">25% Sold</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-3 p-2 bg-light-custom rounded">
+                                                <i class="bi bi-controller text-accent"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">Gaming Convention</h6>
+                                                <small class="text-muted">
+                                                    <i class="bi bi-calendar me-1"></i> June 1, 2025
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <span class="badge badge-secondary">90% Sold</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Sales -->
+                    <div class="col-lg-6">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Recent Sales</h5>
+                                <a href="#" class="btn btn-sm btn-light">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Event</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="user-avatar me-2">SM</div>
+                                                        <div>Sarah Miller</div>
+                                                    </div>
+                                                </td>
+                                                <td>Summer Music Festival</td>
+                                                <td>Apr 14, 2025</td>
+                                                <td><strong class="text-success">$129.00</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="user-avatar me-2">JD</div>
+                                                        <div>John Doe</div>
+                                                    </div>
+                                                </td>
+                                                <td>Film Festival Opening</td>
+                                                <td>Apr 14, 2025</td>
+                                                <td><strong class="text-success">$85.50</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="user-avatar me-2">AK</div>
+                                                        <div>Amanda Kim</div>
+                                                    </div>
+                                                </td>
+                                                <td>Gaming Convention</td>
+                                                <td>Apr 13, 2025</td>
+                                                <td><strong class="text-success">$179.99</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="user-avatar me-2">RJ</div>
+                                                        <div>Robert Johnson</div>
+                                                    </div>
+                                                </td>
+                                                <td>Coffee & Art Exhibition</td>
+                                                <td>Apr 13, 2025</td>
+                                                <td><strong class="text-success">$45.00</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Events Table -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Popular Events</h5>
+                                <div>
+                                    <button class="btn btn-sm btn-light me-2">
+                                        <i class="bi bi-download"></i> Export
+                                    </button>
+                                    <button class="btn btn-sm btn-accent">
+                                        <i class="bi bi-plus-circle"></i> Add Event
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Event Name</th>
+                                                <th>Category</th>
+                                                <th>Date</th>
+                                                <th>Location</th>
+                                                <th>Tickets Sold</th>
+                                                <th>Revenue</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Summer Music Festival</td>
+                                                <td>Music</td>
+                                                <td>May 12, 2025</td>
+                                                <td>Central Park</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="me-2">75%</span>
+                                                        <div class="progress flex-grow-1">
+                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 75%"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$18,250</td>
+                                                <td><span class="badge bg-primary">Active</span></td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                                                            <i class="bi bi-three-dots-vertical"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View</a></li>
+                                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                                            <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Film Festival Opening</td>
+                                                <td>Film</td>
+                                                <td>May 18, 2025</td>
+                                                <td>Metro Cinema</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="me-2">50%</span>
+                                                        <div class="progress flex-grow-1">
+                                                            <div class="progress-bar" role="progressbar" style="width: 50%; background-color: var(--accent);"></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>$9,520</td>
+                                                <td><span class="badge bg-primary">Active</span></td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-sm" type="button" data-bs-toggle="dropdown">
+                                                            <i class="bi bi-three-dots-vertical"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href
