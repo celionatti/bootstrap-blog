@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events - Eventlyy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --primary-green: #77AD78;
+      --dark-blue: #175676;
+      --medium-blue: #4BA3C3;
+      --light-blue: #CCE6F4;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px;
+      overflow-x: hidden;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      background-color: var(--dark-blue);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 1.8rem;
+    }
+
+    .nav-link {
+      color: var(--white) !important;
+      font-weight: 500;
+      margin: 0 5px;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-green) !important;
+    }
+
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--light-blue);
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Events Header section */
+    .events-header {
+      background: linear-gradient(rgba(23, 86, 118, 0.85), rgba(23, 86, 118, 0.9)), url('/api/placeholder/1200/300');
+      background-size: cover;
+      background-position: center;
+      padding: 50px 0;
+    }
+
+    /* Search bar */
+    .search-container {
+      background-color: var(--white);
+      border-radius: 50px;
+      padding: 6px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      max-width: 100%;
+    }
+
+    .search-input {
+      border: none;
+      box-shadow: none;
+      border-radius: 50px;
+      padding-left: 20px;
+    }
+
+    .search-input:focus {
+      box-shadow: none;
+    }
+
+    .search-btn {
+      background-color: var(--primary-green);
+      border-color: var(--primary-green);
+      border-radius: 50px;
+      padding: 10px 20px;
+      color: white;
+      font-weight: 600;
+    }
+
+    .search-btn:hover {
+      background-color: #5f9960;
+      border-color: #5f9960;
+    }
+
+    /* Filters */
+    .filter-section {
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .filter-heading {
+      color: var(--dark-blue);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    .filter-item {
+      margin-bottom: 10px;
+    }
+
+    .filter-checkbox {
+      margin-right: 8px;
+    }
+
+    .price-slider {
+      height: 5px;
+      background-color: #e9ecef;
+      margin-bottom: 15px;
+    }
+
+    .reset-filters {
+      color: var(--medium-blue);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .reset-filters:hover {
+      color: var(--dark-blue);
+      text-decoration: underline;
+    }
+
+    /* Category filter buttons */
+    .category-buttons {
+      margin-bottom: 20px;
+    }
+
+    .btn-category {
+      background-color: var(--white);
+      border: 1px solid #e9ecef;
+      border-radius: 20px;
+      padding: 8px 16px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-category:hover, .btn-category.active {
+      background-color: var(--primary-green);
+      color: white;
+    }
+
+    /* Event cards */
+    .event-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+      height: 100%;
+      border: none;
+      margin-bottom: 25px;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .event-img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .event-date {
+      background-color: var(--primary-green);
+      color: white;
+      font-weight: 600;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      display: inline-block;
+    }
+
+    .event-category {
+      background-color: var(--light-blue);
+      color: var(--dark-blue);
+      font-weight: 500;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-left: 5px;
+    }
+
+    .event-price {
+      font-weight: 700;
+      color: var(--dark-blue);
+    }
+
+    .btn-buy {
+      background-color: var(--primary-green);
+      border-color: var(--primary-green);
+      border-radius: 50px;
+      padding: 8px 20px;
+      color: white;
+      font-weight: 500;
+    }
+
+    .btn-buy:hover {
+      background-color: #5f9960;
+      border-color: #5f9960;
+      color: white;
+    }
+
+    /* Sort and pagination */
+    .sort-container {
+      margin-bottom: 20px;
+    }
+
+    .sort-select {
+      border-radius: 20px;
+      border: 1px solid #e9ecef;
+      padding: 8px 15px;
+    }
+
+    .pagination .page-item .page-link {
+      color: var(--dark-blue);
+      border-radius: 5px;
+      margin: 0 3px;
+    }
+
+    .pagination .page-item.active .page-link {
+      background-color: var(--primary-green);
+      border-color: var(--primary-green);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--dark-blue);
+      color: var(--white);
+      padding: 50px 0 20px;
+      margin-top: 50px;
+    }
+
+    .footer-heading {
+      color: var(--primary-green);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-link {
+      color: var(--white);
+      opacity: 0.8;
+      text-decoration: none;
+      transition: opacity 0.3s;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .footer-link:hover {
+      opacity: 1;
+      color: var(--primary-green);
+    }
+
+    .social-icon {
+      color: var(--white);
+      font-size: 1.5rem;
+      margin-right: 15px;
+      transition: color 0.3s;
+    }
+
+    .social-icon:hover {
+      color: var(--primary-green);
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      margin-top: 30px;
+    }
+
+    /* Responsive fixes */
+    @media (max-width: 767.98px) {
+      .search-btn {
+        padding: 10px;
+      }
+
+      .btn-text {
+        display: none;
+      }
+
+      .events-header {
+        padding: 40px 0;
+      }
+
+      .event-card {
+        margin-bottom: 20px;
+      }
+
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+
+      .offcanvas {
+        max-width: 80%;
+      }
+
+      .category-buttons {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+      }
+    }
+
+    /* Fix for horizontal scroll */
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .container-fluid {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    /* Fix for offcanvas navbar */
+    .offcanvas-body .navbar-nav {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" aria-label="Eventlyy">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Eventlyy.</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Eventlyy.</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sell Tickets</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Music & Concerts</a></li>
+                <li><a class="dropdown-item" href="#">Business & Networking</a></li>
+                <li><a class="dropdown-item" href="#">Arts & Culture</a></li>
+                <li><a class="dropdown-item" href="#">Workshops & Classes</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Help</a>
+            </li>
+          </ul>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-light" type="button">Log In</button>
+            <button class="btn" style="background-color: var(--primary-green); color: white;" type="button">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Events Header Section -->
+  <section class="events-header">
+    <div class="container text-center">
+      <h1 class="display-5 fw-bold text-white mb-4">Discover Events</h1>
+      <p class="lead text-white mb-5">Find and book tickets for the best experiences</p>
+
+      <!-- Search Bar -->
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 px-4">
+          <form action="#" class="search-container">
+            <div class="input-group">
+              <input type="text" class="form-control search-input" name="query" placeholder="Search for events...">
+              <button class="btn search-btn" type="submit">
+                <i class="fas fa-search me-1"></i> <span class="btn-text">Find Events</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container mt-4">
+    <!-- Category Filter Buttons -->
+    <div class="category-buttons">
+      <button class="btn btn-category active">All Events</button>
+      <button class="btn btn-category">Music & Concerts</button>
+      <button class="btn btn-category">Business</button>
+      <button class="btn btn-category">Arts & Theater</button>
+      <button class="btn btn-category">Community</button>
+      <button class="btn btn-category">Workshops</button>
+      <button class="btn btn-category">Sports</button>
+    </div>
+
+    <div class="row">
+      <!-- Filters -->
+      <div class="col-lg-3 mb-4">
+        <div class="filter-section sticky-lg-top" style="top: 100px;">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="filter-heading mb-0">Filters</h4>
+            <a href="#" class="reset-filters">Reset All</a>
+          </div>
+
+          <!-- Date Filter -->
+          <div class="mb-4">
+            <h5 class="filter-heading">Date</h5>
+            <div class="filter-item">
+              <input type="radio" name="date" id="any-date" class="filter-checkbox" checked>
+              <label for="any-date">Any Date</label>
+            </div>
+            <div class="filter-item">
+              <input type="radio" name="date" id="today" class="filter-checkbox">
+              <label for="today">Today</label>
+            </div>
+            <div class="filter-item">
+              <input type="radio" name="date" id="this-weekend" class="filter-checkbox">
+              <label for="this-weekend">This Weekend</label>
+            </div>
+            <div class="filter-item">
+              <input type="radio" name="date" id="this-month" class="filter-checkbox">
+              <label for="this-month">This Month</label>
+            </div>
+            <div class="filter-item">
+              <div class="d-flex align-items-center">
+                <input type="radio" name="date" id="custom-date" class="filter-checkbox">
+                <label for="custom-date" class="me-2">Custom:</label>
+              </div>
+              <div class="mt-2">
+                <input type="date" class="form-control form-control-sm" disabled>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Filter -->
+          <div class="mb-4">
+            <h5 class="filter-heading">Price</h5>
+            <div class="filter-item">
+              <input type="checkbox" id="free" class="filter-checkbox">
+              <label for="free">Free</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="paid" class="filter-checkbox" checked>
+              <label for="paid">Paid</label>
+            </div>
+            <div class="mt-3">
+              <label for="price-range" class="form-label d-flex justify-content-between">
+                <span>Price Range:</span>
+                <span>$0 - $200</span>
+              </label>
+              <input type="range" class="form-range price-slider" min="0" max="200" value="200" id="price-range">
+            </div>
+          </div>
+
+          <!-- Location Filter -->
+          <div class="mb-4">
+            <h5 class="filter-heading">Location</h5>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Enter city or zip code">
+              <button class="btn btn-outline-secondary" type="button">
+                <i class="fas fa-map-marker-alt"></i>
+              </button>
+            </div>
+            <div class="filter-item">
+              <div class="d-flex align-items-center">
+                <label for="distance" class="me-2">Distance:</label>
+                <span class="ms-auto">25 miles</span>
+              </div>
+              <input type="range" class="form-range" min="5" max="100" value="25" id="distance">
+            </div>
+          </div>
+
+          <!-- More Filters -->
+          <div>
+            <h5 class="filter-heading">More Filters</h5>
+            <div class="filter-item">
+              <input type="checkbox" id="online" class="filter-checkbox">
+              <label for="online">Online Events</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="in-person" class="filter-checkbox" checked>
+              <label for="in-person">In-Person Events</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="accessibility" class="filter-checkbox">
+              <label for="accessibility">Accessible Events</label>
+            </div>
+          </div>
+
+          <button class="btn search-btn w-100 mt-4">Apply Filters</button>
+        </div>
+      </div>
+
+      <!-- Events Listing -->
+      <div class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-4 sort-container">
+          <div>
+            <h4 style="color: var(--dark-blue);">146 Events Found</h4>
+          </div>
+          <div class="d-flex align-items-center">
+            <label for="sort-by" class="me-2">Sort by:</label>
+            <select id="sort-by" class="sort-select">
+              <option value="recommended">Recommended</option>
+              <option value="date-asc">Date: Earliest First</option>
+              <option value="date-desc">Date: Latest First</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Event Card 1 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/user1.jpg" class="card-img-top event-img" alt="Summer Festival">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">Apr 20, 2025</span>
+                  <span class="event-category">Music</span>
+                </div>
+                <h5 class="card-title mt-2">Summer Music Festival</h5>
+                <p class="card-text text-muted mb-1">Central Park, New York</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Sat, 2:00 PM - 10:00 PM</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">$45.00</span>
+                  <a href="#" class="btn btn-buy">Buy Tickets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 2 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/user1.jpg" class="card-img-top event-img" alt="Innovation Summit">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">May 15, 2025</span>
+                  <span class="event-category">Business</span>
+                </div>
+                <h5 class="card-title mt-2">Business Innovation Summit</h5>
+                <p class="card-text text-muted mb-1">Convention Center, Dallas</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Fri-Sun, 9:00 AM - 5:00 PM</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">$120.00</span>
+                  <a href="#" class="btn btn-buy">Buy Tickets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 3 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/1.png" class="card-img-top event-img" alt="Broadway Show">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">Jun 5, 2025</span>
+                  <span class="event-category">Arts</span>
+                </div>
+                <h5 class="card-title mt-2">Broadway Theater Show</h5>
+                <p class="card-text text-muted mb-1">Theater District, New York</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Multiple dates</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">$75.00</span>
+                  <a href="#" class="btn btn-buy">Buy Tickets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 4 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/user1.jpg" class="card-img-top event-img" alt="Food Festival">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">Apr 28, 2025</span>
+                  <span class="event-category">Food</span>
+                </div>
+                <h5 class="card-title mt-2">International Food Festival</h5>
+                <p class="card-text text-muted mb-1">City Square, Chicago</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Sun, 11:00 AM - 8:00 PM</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">$25.00</span>
+                  <a href="#" class="btn btn-buy">Buy Tickets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 5 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/1.png" class="card-img-top event-img" alt="Tech Workshop">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">May 10, 2025</span>
+                  <span class="event-category">Workshop</span>
+                </div>
+                <h5 class="card-title mt-2">AI Technology Workshop</h5>
+                <p class="card-text text-muted mb-1">Tech Hub, San Francisco</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Tue, 10:00 AM - 4:00 PM</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">$85.00</span>
+                  <a href="#" class="btn btn-buy">Buy Tickets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 6 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/1.png" class="card-img-top event-img" alt="Local Market">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">Apr 22, 2025</span>
+                  <span class="event-category">Community</span>
+                </div>
+                <h5 class="card-title mt-2">Local Farmers Market</h5>
+                <p class="card-text text-muted mb-1">Community Park, Austin</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Every Saturday, 8:00 AM - 1:00 PM</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">Free</span>
+                  <a href="#" class="btn btn-buy">Register</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 7 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/user1.jpg" class="card-img-top event-img" alt="Yoga Class">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">May 5, 2025</span>
+                  <span class="event-category">Wellness</span>
+                </div>
+                <h5 class="card-title mt-2">Outdoor Yoga Class</h5>
+                <p class="card-text text-muted mb-1">Beachfront, Miami</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Mon-Fri, 7:00 AM - 8:30 AM</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">$15.00</span>
+                  <a href="#" class="btn btn-buy">Buy Tickets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 8 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/1.png" class="card-img-top event-img" alt="Photo Exhibition">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">Jun 12, 2025</span>
+                  <span class="event-category">Arts</span>
+                </div>
+                <h5 class="card-title mt-2">Photography Exhibition</h5>
+                <p class="card-text text-muted mb-1">Art Gallery, Seattle</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Thu-Sun, 10:00 AM - 6:00 PM</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">$20.00</span>
+                  <a href="#" class="btn btn-buy">Buy Tickets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 9 -->
+          <div class="col-md-6 col-xl-4">
+            <div class="card event-card">
+              <img src="assets/img/user1.jpg" class="card-img-top event-img" alt="Sports Tournament">
+              <div class="card-body">
+                <div class="mb-2">
+                  <span class="event-date">May 24, 2025</span>
+                  <span class="event-category">Sports</span>
+                </div>
+                <h5 class="card-title mt-2">Basketball Tournament</h5>
+                <p class="card-text text-muted mb-1">Sports Center, Los Angeles</p>
+                <p class="card-text small mb-3"><i class="fas fa-calendar me-1"></i> Sat-Sun, 9:00 AM - 7:00 PM</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="event-price">$35.00</span>
+                  <a href="#" class="btn btn-buy">Buy Tickets</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4 mb-md-0">
+          <h5 class="footer-heading">Eventlyy</h5>
+          <p class="text-white-50">Connecting people with unforgettable experiences since 2021.</p>
+          <div class="mt-4">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4 mb-md-0">
+          <h5 class="footer-heading">For Attendees</h5>
+          <a href="#" class="footer-link">Browse Events</a>
+          <a href="#" class="footer-link">Get the App</a>
+          <a href="#" class="footer-link">Customer Support</a>
+          <a href="#" class="footer-link">Refund Policy</a>
+          <a href="#" class="footer-link">Gift Cards</a>
+        </div>
+        <div class="col-md-3 mb-4 mb-md-0">
+          <h5 class="footer-heading">For Organizers</h5>
+          <a href="#" class="footer-link">Create Events</a>
+          <a href="#" class="footer-link">Pricing</a>
+          <a href="#" class="footer-link">Resources</a>
+          <a href="#" class="footer-link">Event Marketing</a>
+          <a href="#" class="footer-link">Affiliate Program</a>
+        </div>
+        <div class="col-md-3">
+          <h5 class="footer-heading">Stay Updated</h5>
+          <p class="text-white-50">Subscribe to our newsletter for the latest updates on events and promotions.</p>
+          <form action="#" class="mt-3">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Your email" aria-label="Your email">
+              <button class="btn search-btn" type="submit">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="copyright text-center text-white-50">
+        <p>&copy; 2025 Eventlyy. All rights reserved.</p>
+        <div class="mt-2">
+          <a href="#" class="footer-link d-inline-block mx-2">Privacy Policy</a>
+          <a href="#" class="footer-link d-inline-block mx-2">Terms of Service</a>
+          <a href="#" class="footer-link d-inline-block mx-2">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
