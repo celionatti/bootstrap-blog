@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Summer Music Festival - Eventlyy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --primary-green: #77AD78;
+      --dark-blue: #175676;
+      --medium-blue: #4BA3C3;
+      --light-blue: #CCE6F4;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 70px;
+      overflow-x: hidden;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      background-color: var(--dark-blue);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 1.8rem;
+    }
+
+    .nav-link {
+      color: var(--white) !important;
+      font-weight: 500;
+      margin: 0 5px;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-green) !important;
+    }
+
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--light-blue);
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Event Hero Section */
+    .event-hero {
+      background: linear-gradient(rgba(23, 86, 118, 0.85), rgba(23, 86, 118, 0.9)), url('/api/placeholder/1200/400');
+      background-size: cover;
+      background-position: center;
+      padding: 60px 0;
+      color: var(--white);
+    }
+
+    .event-date-badge {
+      background-color: var(--primary-green);
+      color: white;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .event-category-badge {
+      background-color: var(--light-blue);
+      color: var(--dark-blue);
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      display: inline-block;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-item a {
+      color: var(--medium-blue);
+      text-decoration: none;
+    }
+
+    .breadcrumb-item a:hover {
+      color: var(--primary-green);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--white);
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+      color: var(--white);
+    }
+
+    /* Main content */
+    .event-image {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .ticket-card {
+      background-color: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border: none;
+      position: sticky;
+      top: 90px;
+    }
+
+    .ticket-header {
+      background-color: var(--dark-blue);
+      color: var(--white);
+      padding: 15px 20px;
+    }
+
+    .ticket-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark-blue);
+    }
+
+    .ticket-option {
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .ticket-option:last-child {
+      border-bottom: none;
+    }
+
+    .btn-ticket {
+      background-color: var(--primary-green);
+      border-color: var(--primary-green);
+      border-radius: 50px;
+      padding: 12px 25px;
+      color: white;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .btn-ticket:hover {
+      background-color: #5f9960;
+      border-color: #5f9960;
+      color: white;
+    }
+
+    .section-heading {
+      font-weight: 600;
+      color: var(--dark-blue);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-blue);
+    }
+
+    .event-info-icon {
+      color: var(--primary-green);
+      font-size: 1.2rem;
+      width: 30px;
+    }
+
+    .event-organizer {
+      background-color: var(--light-blue);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .organizer-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .map-container {
+      height: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .feature-icon {
+      color: var(--primary-green);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    /* Related events */
+    .related-event-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+      height: 100%;
+      border: none;
+    }
+
+    .related-event-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .related-event-img {
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .related-event-date {
+      background-color: var(--primary-green);
+      color: white;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      display: inline-block;
+    }
+
+    .related-event-category {
+      background-color: var(--light-blue);
+      color: var(--dark-blue);
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      display: inline-block;
+      margin-left: 5px;
+    }
+
+    .btn-share {
+      background-color: var(--light-blue);
+      color: var(--dark-blue);
+      border-radius: 50px;
+      padding: 8px 15px;
+      font-weight: 500;
+      margin-right: 10px;
+    }
+
+    .btn-share:hover {
+      background-color: var(--medium-blue);
+      color: white;
+    }
+
+    /* Review section */
+    .review-card {
+      background-color: var(--white);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    .reviewer-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .rating-stars {
+      color: #FFD700;
+      margin-right: 10px;
+    }
+
+    /* FAQ Section */
+    .accordion-button:not(.collapsed) {
+      background-color: var(--light-blue);
+      color: var(--dark-blue);
+      box-shadow: none;
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: var(--light-blue);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--dark-blue);
+      color: var(--white);
+      padding: 50px 0 20px;
+      margin-top: 50px;
+    }
+
+    .footer-heading {
+      color: var(--primary-green);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-link {
+      color: var(--white);
+      opacity: 0.8;
+      text-decoration: none;
+      transition: opacity 0.3s;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .footer-link:hover {
+      opacity: 1;
+      color: var(--primary-green);
+    }
+
+    .social-icon {
+      color: var(--white);
+      font-size: 1.5rem;
+      margin-right: 15px;
+      transition: color 0.3s;
+    }
+
+    .social-icon:hover {
+      color: var(--primary-green);
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      margin-top: 30px;
+    }
+
+    /* Responsive fixes */
+    @media (max-width: 767.98px) {
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+
+      .offcanvas {
+        max-width: 80%;
+      }
+
+      .event-hero {
+        padding: 40px 0;
+      }
+
+      .ticket-card {
+        position: static;
+        margin-top: 30px;
+      }
+
+      .related-event-card {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" aria-label="Eventlyy">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Eventlyy.</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Eventlyy.</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="events.html">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sell Tickets</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Music & Concerts</a></li>
+                <li><a class="dropdown-item" href="#">Business & Networking</a></li>
+                <li><a class="dropdown-item" href="#">Arts & Culture</a></li>
+                <li><a class="dropdown-item" href="#">Workshops & Classes</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Help</a>
+            </li>
+          </ul>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-light" type="button">Log In</button>
+            <button class="btn" style="background-color: var(--primary-green); color: white;" type="button">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Event Hero Section -->
+  <section class="event-hero">
+    <div class="container">
+      <!-- Breadcrumbs -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="events.html">Events</a></li>
+          <li class="breadcrumb-item"><a href="#">Music</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Summer Music Festival</li>
+        </ol>
+      </nav>
+
+      <div class="mt-4">
+        <span class="event-date-badge"><i class="fas fa-calendar me-2"></i>Apr 20, 2025</span>
+        <span class="event-category-badge"><i class="fas fa-music me-2"></i>Music</span>
+      </div>
+      <h1 class="display-5 fw-bold mt-3">Summer Music Festival</h1>
+      <p class="lead mb-0"><i class="fas fa-map-marker-alt me-2"></i>Central Park, New York</p>
+      <p class="lead"><i class="fas fa-clock me-2"></i>Saturday, 2:00 PM - 10:00 PM</p>
+
+      <div class="mt-4">
+        <button class="btn btn-share"><i class="fas fa-share-alt me-2"></i>Share</button>
+        <button class="btn btn-share"><i class="far fa-heart me-2"></i>Save</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Event Details -->
+      <div class="col-lg-8">
+        <img src="assets/img/user1.jpg" class="event-image mb-4" alt="Summer Music Festival">
+
+        <div class="my-5">
+          <h3 class="section-heading">About This Event</h3>
+          <p>Join us for the most anticipated music festival of the year! The Summer Music Festival brings together top artists from around the world for an unforgettable day of live performances, delicious food, and amazing atmosphere.</p>
+
+          <p>This year's lineup features an incredible mix of established stars and emerging talent across three stages. Experience a diverse range of musical genres from pop and rock to electronic and indie. There's something for every music lover!</p>
+
+          <p>In addition to the stellar musical performances, the festival offers:</p>
+          <ul>
+            <li>Gourmet food vendors featuring cuisines from around the world</li>
+            <li>Craft beer garden with selections from local breweries</li>
+            <li>Art installations and interactive experiences</li>
+            <li>VIP areas with premium amenities and exclusive viewing spots</li>
+            <li>Merchandise stands featuring festival exclusives</li>
+          </ul>
+
+          <p>Whether you're a festival veteran or attending your first music event, the Summer Music Festival promises an immersive experience that will create memories to last a lifetime. Don't miss out on what critics have called "the must-attend event of the summer season."</p>
+        </div>
+
+        <div class="my-5">
+          <h3 class="section-heading">Festival Lineup</h3>
+
+          <h5 class="mt-4 mb-3 fw-bold">Main Stage</h5>
+          <ul>
+            <li><strong>2:30 PM - 3:30 PM:</strong> The Resonant Echo</li>
+            <li><strong>4:00 PM - 5:00 PM:</strong> Lunar Tides</li>
+            <li><strong>5:30 PM - 6:30 PM:</strong> Electric Pulse</li>
+            <li><strong>7:00 PM - 8:30 PM:</strong> Harmony Junction</li>
+            <li><strong>9:00 PM - 10:00 PM:</strong> Melody Makers (Headliner)</li>
+          </ul>
+
+          <h5 class="mt-4 mb-3 fw-bold">Horizon Stage</h5>
+          <ul>
+            <li><strong>2:00 PM - 2:45 PM:</strong> Acoustic Dreamers</li>
+            <li><strong>3:15 PM - 4:00 PM:</strong> The Vibrant Void</li>
+            <li><strong>4:30 PM - 5:15 PM:</strong> Sonic Wave</li>
+            <li><strong>5:45 PM - 6:30 PM:</strong> Rhythm Collective</li>
+            <li><strong>7:00 PM - 8:00 PM:</strong> Summer Breeze</li>
+            <li><strong>8:30 PM - 9:30 PM:</strong> Twilight Echoes</li>
+          </ul>
+
+          <h5 class="mt-4 mb-3 fw-bold">Discovery Stage</h5>
+          <ul>
+            <li><strong>2:15 PM - 2:45 PM:</strong> Rising Stars</li>
+            <li><strong>3:15 PM - 3:45 PM:</strong> New Sound</li>
+            <li><strong>4:15 PM - 4:45 PM:</strong> Tomorrow's Talent</li>
+            <li><strong>5:15 PM - 5:45 PM:</strong> Fresh Beat</li>
+            <li><strong>6:15 PM - 6:45 PM:</strong> Emerging Artists Showcase</li>
+            <li><strong>7:15 PM - 8:00 PM:</strong> The Next Wave</li>
+            <li><strong>8:30 PM - 9:15 PM:</strong> Future Sounds</li>
+          </ul>
+
+          <p class="mt-4"><em>* Schedule subject to change. Please check the festival app for real-time updates.</em></p>
+        </div>
+
+        <div class="my-5">
+          <h3 class="section-heading">Event Features</h3>
+          <div class="row text-center">
+            <div class="col-md-4 mb-4">
+              <div class="feature-icon">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <h5>Food & Drinks</h5>
+              <p class="text-muted">Variety of food options and beverages available for purchase</p>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="feature-icon">
+                <i class="fas fa-wheelchair"></i>
+              </div>
+              <h5>Accessibility</h5>
+              <p class="text-muted">Wheelchair accessible venues and amenities</p>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="feature-icon">
+                <i class="fas fa-parking"></i>
+              </div>
+              <h5>Parking</h5>
+              <p class="text-muted">Paid parking available nearby</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-5">
+          <h3 class="section-heading">Location & Venue</h3>
+          <div class="d-flex align-items-center mb-3">
+            <div class="event-info-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <h5 class="mb-0">Central Park - Great Lawn</h5>
+              <p class="text-muted mb-0">E 79th St &amp; 5th Ave, New York, NY 10021</p>
+            </div>
+          </div>
+          <div class="map-container">
+            <img src="assets/img/1.png" alt="Map" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div class="mt-3">
+            <p><i class="fas fa-info-circle me-2 text-primary"></i> The venue is accessible via public transportation. The closest subway stations are 77th St (6) and 86th St (4, 5, 6).</p>
+          </div>
+        </div>
+
+        <div class="event-organizer">
+          <div class="d-flex align-items-center">
+            <img src="assets/img/user1.jpg" class="organizer-img me-3" alt="Organizer">
+            <div>
+              <h5 class="mb-1">NYC Music Events</h5>
+              <p class="text-muted mb-2">Event Organizer</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">View Organizer Profile</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-5">
+          <h3 class="section-heading">Reviews</h3>
+          <div class="d-flex align-items-center mb-4">
+            <h4 class="me-3 mb-0">4.8</h4>
+            <div class="rating-stars me-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="text-muted">(124 reviews)</span>
+          </div>
+
+          <!-- Review 1 -->
+          <div class="review-card">
+            <div class="d-flex mb-3">
+              <img src="assets/img/1.png" class="reviewer-img me-3" alt="Reviewer">
+              <div>
+                <h6 class="mb-0">Sarah Johnson</h6>
+                <div class="text-muted small">Attended last year</div>
+                <div class="rating-stars small mt-1">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p>Amazing experience! The lineup was incredible and the atmosphere was electric. Food options were great and not too overpriced. Definitely coming back this year!</p>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="review-card">
+            <div class="d-flex mb-3">
+              <img src="assets/img/user1.jpg" class="reviewer-img me-3" alt="Reviewer">
+              <div>
+                <h6 class="mb-0">Michael Chen</h6>
+                <div class="text-muted small">Attended last year</div>
+                <div class="rating-stars small mt-1">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p>Great music and good vibes overall. My only complaint would be the long lines for bathrooms. The performances were top-notch and the sound quality was excellent. Worth every penny!</p>
+          </div>
+
+          <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-secondary">Read All Reviews</a>
+          </div>
+        </div>
+
+        <div class="my-5">
+          <h3 class="section-heading">Frequently Asked Questions</h3>
+          <div class="accordion" id="eventFAQ">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  What's included in my ticket?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#eventFAQ">
+                <div class="accordion-body">
+                  Your ticket includes full-day access to all three stages and performances. Food, drinks, and merchandise are available for purchase separately. VIP tickets include access to exclusive viewing areas, complimentary refreshments, and festival merchandise.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  What is the refund policy?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#eventFAQ">
+                <div class="accordion-body">
+                  Tickets are refundable up to 14 days before the event. After that, tickets can be transferred to another person but are non-refundable. In case of event cancellation, full refunds will be issued automatically.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  What items are prohibited at the festival?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#eventFAQ">
+                <div class="accordion-body">
+                  Prohibited items include outside food and beverages, large bags or backpacks, professional cameras or recording equipment, weapons of any kind, illegal substances, and pets (service animals excepted). Small personal bags, empty water bottles, sunscreen, and blankets are permitted.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Is the festival suitable for children?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#eventFAQ">
+                <div class="accordion-body">
+                  Children under 10 can attend for free when accompanied by a ticket-holding adult. We recommend ear protection for young children. Please note that some performances may not be appropriate for young audiences. There is a designated family-friendly area with activities for children.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ticket Options Sidebar -->
+      <div class="col-lg-4">
+        <div class="ticket-card">
+          <div class="ticket-header">
+            <h4 class="mb-0">Get Tickets</h4>
+          </div>
+          <div class="card-body p-2">
+            <p class="ticket-price">$45.00</p>
+            <p class="text-muted"><i class="fas fa-tag me-2"></i>31% of tickets sold</p>
+
+            <!-- Ticket options -->
+            <div class="ticket-option">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">General Admission</h6>
+                  <p class="text-muted mb-0 small">Access to all stages</p>
+                </div>
+                <span>$45.00</span>
+              </div>
+              <div class="mt-2">
+                <select class="form-select form-select-sm">
+                  <option value="1">1 ticket</option>
+                  <option value="2">2 tickets</option>
+                  <option value="3">3 tickets</option>
+                  <option value="4">4 tickets</option>
+                  <option value="5">5 tickets</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="ticket-option">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">VIP Pass</h6>
+                  <p class="text-muted mb-0 small">Premium viewing areas, exclusive lounges</p>
+                </div>
+                <span>$120.00</span>
+              </div>
+              <div class="mt-2">
+                <select class="form-select form-select-sm">
+                  <option value="0">0 tickets</option>
+                  <option value="1">1 ticket</option>
+                  <option value="2">2 tickets</option>
+                  <option value="3">3 tickets</option>
+                  <option value="4">4 tickets</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="ticket-option">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">Group Package (5+)</h6>
+                  <p class="text-muted mb-0 small">Discounted rate for groups</p>
+                </div>
+                <span>$40.00 /person</span>
+              </div>
+              <div class="mt-2">
+                <select class="form-select form-select-sm">
+                  <option value="0">0 packages</option>
+                  <option value="1">1 package (5 people)</option>
+                  <option value="2">2 packages (10 people)</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="btn btn-ticket">
+              <i class="fas fa-ticket-alt me-2"></i>Get Tickets Now
+            </button>
+
+            <div class="mt-4">
+              <p class="small mb-2"><i class="fas fa-shield-alt me-2 text-success"></i>Secure checkout</p>
+              <p class="small mb-0 text-muted">Tickets will be emailed immediately after purchase</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="card mt-4 border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="mb-3">Event Information</h5>
+            <div class="d-flex align-items-start mb-3">
+              <div class="event-info-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <div>
+                <h6 class="mb-0">Date and Time</h6>
+                <p class="text-muted mb-0">Saturday, April 20, 2025<br>2:00 PM - 10:00 PM</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-start mb-3">
+              <div class="event-info-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h6 class="mb-0">Location</h6>
+                <p class="text-muted mb-0">Central Park - Great Lawn<br>New York, NY</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-start">
+              <div class="event-info-icon">
+                <i class="fas fa-user-friends"></i>
+              </div>
+              <div>
+                <h6 class="mb-0">Attendees</h6>
+                <p class="text-muted mb-0">1,245 going · 3,500 interested</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Events -->
+    <div class="my-5">
+      <h3 class="section-heading">Similar Events You Might Like</h3>
+      <div class="row">
+        <!-- Related Event 1 -->
+        <div class="col-md-4 mb-4">
+          <div class="card related-event-card">
+            <img src="assets/img/user1.jpg" class="related-event-img" alt="Jazz Night">
+            <div class="card-body">
+              <div class="mb-2">
+                <span class="related-event-date">May 5, 2025</span>
+                <span class="related-event-category">Jazz</span>
+              </div>
+              <h5 class="card-title">Downtown Jazz Night</h5>
+              <p class="card-text text-muted small">Blue Note Jazz Club, New York</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold">$35.00</span>
+                <a href="#" class="btn btn-sm btn-outline-primary">View Event</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Event 2 -->
+        <div class="col-md-4 mb-4">
+          <div class="card related-event-card">
+            <img src="assets/img/1.png" class="related-event-img" alt="Rock Concert">
+            <div class="card-body">
+              <div class="mb-2">
+                <span class="related-event-date">Jun 12, 2025</span>
+                <span class="related-event-category">Rock</span>
+              </div>
+              <h5 class="card-title">Indie Rock Showcase</h5>
+              <p class="card-text text-muted small">Brooklyn Steel, New York</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold">$40.00</span>
+                <a href="#" class="btn btn-sm btn-outline-primary">View Event</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Event 3 -->
+        <div class="col-md-4 mb-4">
+          <div class="card related-event-card">
+            <img src="assets/img/user1.jpg" class="related-event-img" alt="EDM Festival">
+            <div class="card-body">
+              <div class="mb-2">
+                <span class="related-event-date">Jul 8, 2025</span>
+                <span class="related-event-category">Electronic</span>
+              </div>
+              <h5 class="card-title">Electric Garden Festival</h5>
+              <p class="card-text text-muted small">Randall's Island, New York</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold">$65.00</span>
+                <a href="#" class="btn btn-sm btn-outline-primary">View Event</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h3>Never Miss an Event</h3>
+          <p class="text-muted mb-4">Subscribe to our newsletter and be the first to know about upcoming events and exclusive offers.</p>
+          <div class="input-group mb-3 mx-auto" style="max-width: 500px;">
+            <input type="email" class="form-control" placeholder="Your email address" aria-label="Email" aria-describedby="subscribe-btn">
+            <button class="btn btn-primary" type="button" id="subscribe-btn" style="background-color: var(--primary-green); border-color: var(--primary-green);">Subscribe</button>
+          </div>
+          <p class="small text-muted">By subscribing, you agree to receive marketing emails from Eventlyy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+          <h5 class="footer-heading">Eventlyy.</h5>
+          <p class="text-white-50">Discover, book, and enjoy events in your city. From concerts to workshops, we've got you covered.</p>
+          <div class="mt-3">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+          <h5 class="footer-heading">Explore</h5>
+          <a href="#" class="footer-link">Music & Concerts</a>
+          <a href="#" class="footer-link">Workshops & Classes</a>
+          <a href="#" class="footer-link">Arts & Culture</a>
+          <a href="#" class="footer-link">Business & Networking</a>
+          <a href="#" class="footer-link">All Categories</a>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+          <h5 class="footer-heading">Information</h5>
+          <a href="#" class="footer-link">About Us</a>
+          <a href="#" class="footer-link">How It Works</a>
+          <a href="#" class="footer-link">Pricing</a>
+          <a href="#" class="footer-link">Blog</a>
+          <a href="#" class="footer-link">Careers</a>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-heading">Support</h5>
+          <a href="#" class="footer-link">Help Center</a>
+          <a href="#" class="footer-link">Contact Us</a>
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">Trust & Safety</a>
+        </div>
+      </div>
+      <div class="copyright text-center">
+        <p class="mb-0">&copy; 2025 Eventlyy. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
